@@ -1,0 +1,37 @@
+.product-card{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 5%;
+    margin-right: 5%;
+    background: #fffbfe;
+    border: 1px solid #cac4d0;
+    border-radius: 12px;
+    box-shadow: unset;
+}
+
+.card-header{
+    padding: 16px;
+    align-items: center;
+   // justify-content: center;
+}
+
+.avatar{
+    display: flex;
+    padding-right: 20px;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.card-text{
+    padding-right: 20px;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+.card-button{
+    justify-content: center;
+    align-items: center;
+}

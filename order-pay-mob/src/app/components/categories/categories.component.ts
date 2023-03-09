@@ -1,8 +1,10 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { CategoriesModel } from 'src/app/models/categories.model';
 import { Data } from 'src/app/models/data.model';
+import { SearchFilterPipe } from 'src/app/pipes/search-filter.pipe';
 import { DataServiceService } from 'src/app/services/data-service.service';
 
 /**
@@ -13,10 +15,14 @@ import { DataServiceService } from 'src/app/services/data-service.service';
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.scss'],
 })
-export class CategoriesComponent {
+export class CategoriesComponent implements OnInit {
   categories: CategoriesModel[] = [];
-
-  constructor(public service: DataServiceService) {}
+  searchText: string = '';
+  constructor(
+    public service: DataServiceService,
+    public filter: SearchFilterPipe,
+    private router: Router
+  ) {}
   ngOnInit() {
     this.getAllCategories();
   }
@@ -24,8 +30,6 @@ export class CategoriesComponent {
   getAllCategories(): void {
     this.service.getAllData().subscribe({
       next: (res: Data) => {
-        console.log('res', res);
-
         res.categories.forEach((category) => {
           this.categories.push({
             id: category.id,
@@ -38,5 +42,10 @@ export class CategoriesComponent {
         console.log(err);
       },
     });
+  }
+
+  goToProducts(id: number) {
+    
+    this.router.navigate(['categories', id]);
   }
 }

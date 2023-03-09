@@ -1,10 +1,39 @@
-<mat-list class="categories-list">
-  <mat-list-item *ngFor="let item of categories">
-    <div class="category-items">
-      <div mat-line class="">
-        {{ item.categoryName.toUpperCase() }}
+<div>
+  <p class="text-comunical">COMUNICAL</p>
+  <mat-toolbar class="search-toolbar">
+    <mat-toolbar-row style="padding: 10px" class="search-row">
+      <input
+        class="search-control"
+        type="text"
+        placeholder="Filter categories..."
+        [(ngModel)]="searchText"
+        #searchbar
+      />
+      <button mat-icon-button class="search-icon">
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <mat-list class="categories-list">
+    <mat-list-item *ngFor="let item of categories | filter : searchText" (click)="goToProducts(item.id)">
+      <div class="category-items">
+        <div mat-line class="text demo-2">
+          {{ item.categoryName.toUpperCase() }}
+        </div>
+        <div
+          mat-line
+          class="demo-2"
+          *ngIf="item.productNumber == 0 || item.productNumber > 1"
+        >
+          {{ item.productNumber }} Items
+        </div>
+        <div mat-line class="demo-2" *ngIf="item.productNumber == 1">
+          {{ item.productNumber }} Item
+        </div>
+        
       </div>
-      <div mat-line class="">{{ item.productNumber }} Items</div>
-    </div>
-  </mat-list-item>
-</mat-list>
+      <hr>
+    </mat-list-item>
+  </mat-list>
+</div>
